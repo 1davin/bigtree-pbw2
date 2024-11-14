@@ -1,0 +1,6 @@
+@import "../node_modules/bootstrap/scss/variables";
+
+$custom-colors: (
+    "warnaLiburin" : #0399ff
+);
+$theme-colors: map-merge($theme-colors, $custom-colors);
