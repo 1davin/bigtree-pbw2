@@ -1,3 +1,7 @@
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+<!-- Navbar -->
 <nav class="navbar bg-primary navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('dashboard') }}">{{ config('app.name') }}</a>
@@ -9,10 +13,10 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                      @auth
-					                <a class="nav-link " aria-current="page" href="{{route('dashboard')}}">Dashboard</a>
-					            @else
-					                <a class="nav-link" aria-current="page" href="{{route('home')}}">Home</a>
-					            @endauth
+                        <a class="nav-link " aria-current="page" href="{{route('dashboard')}}">Dashboard</a>
+                    @else
+                        <a class="nav-link" aria-current="page" href="{{route('home')}}">Home</a>
+                    @endauth
                 </li>
             </ul>
             @auth
@@ -25,9 +29,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
+                            <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -50,7 +52,9 @@
                     </li>
                 </ul>
             @endauth
-
         </div>
     </div>
 </nav>
+
+<!-- Bootstrap JS (Including Popper.js) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
