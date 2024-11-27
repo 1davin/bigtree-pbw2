@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -58,3 +59,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Rute autentikasi (aktifkan jika menggunakan fitur autentikasi Laravel)
 // Auth::routes();
+
+Route::post('/pay', [PaymentController::class, 'pay']);
+Route::get('/', [OrderController::class,'index']);
+Route::post('/checkout', [OrderController::class,'checkout']);
+

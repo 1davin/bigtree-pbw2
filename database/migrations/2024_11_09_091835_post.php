@@ -3,14 +3,10 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB; 
 
-class CreatePostsTable extends Migration
+return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
@@ -20,21 +16,18 @@ class CreatePostsTable extends Migration
             $table->string('linkPayment', 255);
             $table->decimal('harga', 10, 2);
             $table->text('body');
-            $table->binary('image')->nullable(); 
-            $table->binary('image1')->nullable();
-            $table->binary('image2')->nullable();
-            $table->binary('image3')->nullable();
-            $table->timestamps(); 
+            $table->timestamps();
         });
+
+       
+        DB::statement("ALTER TABLE posts ADD image MEDIUMBLOB NULL");
+        DB::statement("ALTER TABLE posts ADD image1 MEDIUMBLOB NULL");
+        DB::statement("ALTER TABLE posts ADD image2 MEDIUMBLOB NULL");
+        DB::statement("ALTER TABLE posts ADD image3 MEDIUMBLOB NULL");
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('posts');
     }
-}
+};
