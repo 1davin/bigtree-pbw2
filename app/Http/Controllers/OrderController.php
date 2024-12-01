@@ -52,4 +52,15 @@ $snapToken = \Midtrans\Snap::getSnapToken($params);
 return view('checkout',compact('snapToken','order'));
 
     }
+    public function callback(Request $request){
+        $serverkey = config('midtrans.server_key');
+        $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$serverkey);
+       if($hashed == $request->signature_key){
+            if($request->transaction_status=='capture'){
+                $order = Order::find($request->order_id);
+                $order -> update(['status' => 'paid']);
+            }
+
+        }
+    }
 }

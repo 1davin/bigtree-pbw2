@@ -76,7 +76,7 @@
             position: absolute;
             bottom: 20px;
             right: 20px;
-        }
+        } 
 
         .price {
             font-size: 18px;
@@ -149,7 +149,10 @@
     </div>
     <div class="error-message" id="errorMessage">Maaf, jumlah tiket yang diminta tidak tersedia.</div>
 </div>
-                    <button id="pesanButton" class="button mt-2" disabled>PESAN</button>
+                    {{-- <button id="pesanButton" class="button mt-2" disabled>PESAN</button> --}}
+    <input type="hidden" name="trip_id" value="{{ $trip ? $trip->id : '' }}">
+                    <a  id="pesanButton" class="button mt-2" href="{{ route('pesan.trip', ['id' => $trip->id]) }}"disabled>Pesan Sekarang</a>
+
                     <div class="price">Rp.28.000/Orang</div>
                 </div>
             </div>

@@ -58,6 +58,8 @@
     color: #a0a0a0;
 }
 
+
+
 /* Media query untuk perangkat mobile */
 @media (max-width: 630px) {
     .search-input-group {
@@ -68,3 +70,25 @@
         grid-template-columns: 1fr;
     }
 }
+.rounded-3 {
+    border-radius: 1rem; /* Sesuaikan nilai pembulatan */
+}
+
+@media (max-width: 630px) {
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr; /* Semua card tampil satu kolom */
+        gap: 20px; /* Jarak antar card */
+        margin: 0 15px; /* Margin pada sisi kiri dan kanan */
+    }
+
+    .card {
+        margin: 0 auto; /* Memastikan card berada di tengah */
+        max-width: 100%; /* Card mengambil lebar penuh */
+    }
+
+    .card img {
+        height: 130px; /* Batasi tinggi gambar */
+    }
+}
+

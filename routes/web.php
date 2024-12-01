@@ -4,6 +4,10 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PesanController;
+
+
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -55,12 +59,20 @@ Route::get('/test', function () {
 });
 
 // Rute home setelah login
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Rute autentikasi (aktifkan jika menggunakan fitur autentikasi Laravel)
 // Auth::routes();
 
-Route::post('/pay', [PaymentController::class, 'pay']);
 Route::get('/', [OrderController::class,'index']);
 Route::post('/checkout', [OrderController::class,'checkout']);
+
+
+Route::get('/pesan/{id}', [PesanController::class, 'form'])->name('pesan.form');
+Route::post('/pesan/submit', [PesanController::class, 'submit'])->name('pesan.submit');
+Route::post('/pembayaran', [PesanController::class, 'pembayaran'])->name('pesan.pembayaran');
+
+
+
+
 

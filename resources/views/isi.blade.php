@@ -141,7 +141,10 @@
                 <div class="price-button-container d-flex flex-column align-items-center mt-3">
                     <div class="mb-3">
     
-                    <button  class="button mt-2" >PESAN</button>
+                    {{-- <button  class="button mt-2" >PESAN</button> --}}
+                    <a href="{{ route('pesan.form', $post->id) }}" class="button mt-2">PESAN</a>
+
+
                     <div class="price">Rp{{ number_format($post->harga, 0, ',', '.') }}/tiket</div>
                 </div>
             </div>
