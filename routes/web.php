@@ -68,9 +68,14 @@ Route::get('/', [OrderController::class,'index']);
 Route::post('/checkout', [OrderController::class,'checkout']);
 
 
-Route::get('/pesan/{id}', [PesanController::class, 'form'])->name('pesan.form');
 Route::post('/pesan/submit', [PesanController::class, 'submit'])->name('pesan.submit');
 Route::post('/pembayaran', [PesanController::class, 'pembayaran'])->name('pesan.pembayaran');
+// Route::get('/pesan/trip/{id}', [PesanController::class, 'form'])->name('pesan.form');
+// Route::get('/pesan/{id}', [PesanController::class, 'form'])->name('pesan.form');
+Route::get('/pesan/{type}/{id}', [PesanController::class, 'form'])->name('pesan.form');
+
+
+
 
 
 

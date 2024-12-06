@@ -45,13 +45,16 @@
                 </form>
             </div>
 
-            <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 mt-5">
+            <div class="grid gap-5  mt-5">
+                
                 @if($trips->isEmpty())
                     <div class="col-12 text-center text-muted">
                         <p>Wisata yang Anda cari tidak dapat ditemukan.</p>
                         <a href="{{ route('trip.index') }}" class="text-primary fw-semibold">Kembali</a>
-                    </div>
+                    </div> </div>
+
                 @else
+                <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 mt-5">
                     @foreach ($trips as $trip) 
                         <main class="d-flex justify-content-evenly">
                             <div class="card mb-3 shadow-lg" style="width: 18rem; height: 20rem; border-radius: 0;">
@@ -61,7 +64,8 @@
                                         <a href="{{ route('trip.show', $trip->id) }}" class="text-black no-underline hover:text-black">{{ $trip->wisata }}</a>
                                     </h5>
                                     <p class="card-text text-sm">{{ Str::limit($trip->body, 50) }}</p>
-                                    <a href="{{ route('trip.show', $trip->id) }}" class="btn btn-primary w-50 fw-semibold rounded-pill mt-3">Pesan</a>
+                                    <a href="/trip/{{$trip->id}}" class="btn btn-primary w-50 fw-semibold rounded-pill mt-3">Pesan</a>
+
                                 </div>
                             </div>
                         </main>

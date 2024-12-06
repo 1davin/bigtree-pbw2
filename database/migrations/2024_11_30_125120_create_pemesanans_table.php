@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pemesanans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->foreignId('post_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('nama');
             $table->string('email');
             $table->integer('jumlah_tiket');

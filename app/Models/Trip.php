@@ -18,12 +18,18 @@ class Trip extends Model
         'author',
         'body',
         'link',
+        'harga',
         'stok',
         'image',
         'image1',
         'image2',
         'image3'
     ];
+
+    public function pemesanans()
+    {
+        return $this->hasMany(Pemesanan::class);
+    }
 
     
 }

@@ -16,7 +16,8 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->string('wisata');              
+            $table->string('wisata'); 
+            $table->decimal('harga', 10, 2);             
             $table->string('author');               
             $table->text('body');                  
             $table->string('link');                

@@ -40,6 +40,11 @@
         </div>
 
         <div class="mb-3">
+            <label for="harga" class="form-label">Harga</label>
+            <input type="number" name="harga" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
             <label for="stok" class="form-label">Stok</label>
             <input type="number" name="stok" class="form-control" required>
         </div>

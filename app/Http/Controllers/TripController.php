@@ -82,6 +82,7 @@ class TripController extends Controller
             'body' => 'required|string',
             'link' => 'required|string|max:255',
             'stok' => 'required|integer',
+            'harga' => 'required|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:16384',
             'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:16384',
             'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:16384',
@@ -93,6 +94,7 @@ class TripController extends Controller
         $trip->wisata = $validatedData['wisata'];
         $trip->author = $validatedData['author'];
         $trip->body = $validatedData['body'];
+        $trip->harga = $validatedData['harga'];
         $trip->link = $validatedData['link'];
         $trip->stok = $validatedData['stok'];
 

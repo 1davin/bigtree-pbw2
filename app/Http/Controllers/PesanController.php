@@ -4,19 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Trip;
 use App\Models\Pemesanan;
 use Illuminate\Support\Facades\Log;
 
 class PesanController extends Controller
 {
     /**
-     * Menampilkan form pemesanan berdasarkan ID Post
+     * Menampilkan form pemesanan berdasarkan ID Post atau Trip
      */
-    public function form($id)
-    {
-        $post = Post::findOrFail($id); // Mengambil data wisata berdasarkan ID
-        return view('form_pemesanan', compact('post'));
+    public function form($type, $id)
+{
+    if ($type === 'trip') {
+        $data = Trip::findOrFail($id);
+    } elseif ($type === 'post') {
+        $data = Post::findOrFail($id);
+    } else {
+        abort(404, 'Type not recognized.');
     }
+
+    return view('form_pemesanan', compact('data', 'type'));
+}
+
+    
+
 
     /**
      * Proses pembuatan pemesanan dan mengembalikan Snap Token
@@ -24,45 +35,73 @@ class PesanController extends Controller
     public function submit(Request $request)
     {
         $validatedData = $request->validate([
-            'post_id' => 'required|exists:posts,id',
+            'type' => 'required|in:post,trip',
+            'id' => 'required|integer',
             'nama' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'jumlah_tiket' => 'required|integer|min:1',
         ]);
-
-        // Ambil data post untuk mendapatkan detail wisata
-        $post = Post::findOrFail($validatedData['post_id']);
-        
-
-        // Validasi harga
-        if (!$post->harga || !is_numeric($post->harga) || $post->harga <= 0) {
-            return back()->withErrors(['error' => 'Harga tidak valid untuk post ini.']);
+    
+        // Log data yang diterima untuk debugging
+        \Log::info('Data yang diterima:', $request->all());
+    
+        // Ambil data berdasarkan tipe
+        if ($validatedData['type'] === 'trip') {
+            $data = Trip::findOrFail($validatedData['id']);
+    
+            // Periksa stok tersedia
+            if ($validatedData['jumlah_tiket'] > $data->stok) {
+                return response()->json(['error' => 'Jumlah tiket melebihi stok tersedia.'], 422);
+            }
+        } else {
+            $data = Post::findOrFail($validatedData['id']);
         }
-
+    
+        // Validasi harga
+        if (!$data->harga || !is_numeric($data->harga) || $data->harga <= 0) {
+            return back()->withErrors(['error' => 'Harga tidak valid untuk data ini.']);
+        }
+    
         // Hitung total harga
-        $totalPrice = $validatedData['jumlah_tiket'] * (float) $post->harga;
-
+        $totalPrice = $validatedData['jumlah_tiket'] * (float) $data->harga;
+    
         // Buat order_id unik
-        $orderId = 'ORDER-' . $post->id . '-' . time();
-
+        $orderId = strtoupper($validatedData['type']) . '-' . $data->id . '-' . time();
+    
+        // Tentukan trip_id dan post_id berdasarkan type
+        $tripId = $validatedData['type'] === 'trip' ? $validatedData['id'] : null;
+        $postId = $validatedData['type'] === 'post' ? $validatedData['id'] : null;
+    
+        // Periksa agar hanya salah satu kolom yang terisi
+        if ($tripId === null && $postId === null) {
+            return response()->json(['error' => 'Data tidak valid. Tipe pemesanan harus dipilih dengan benar.'], 400);
+        }
+    
         // Simpan data pemesanan ke database
         $pemesanan = Pemesanan::create([
-            'post_id' => $validatedData['post_id'],
+            'trip_id' => $tripId,
+            'post_id' => $postId,
             'nama' => $validatedData['nama'],
             'email' => $validatedData['email'],
             'jumlah_tiket' => $validatedData['jumlah_tiket'],
-            'nama_wisata' => $post->wisata,
+            'nama_wisata' => $data->wisata,
             'status_pembayaran' => 'unpaid',
             'total_harga' => $totalPrice,
             'order_id' => $orderId,
         ]);
-
-        // Konfigurasi Midtrans
+    
+        // Kurangi stok jika type adalah trip
+        if ($tripId) {
+            $data->stok -= $validatedData['jumlah_tiket'];
+            $data->save();
+        }
+    
+        // Konfigurasi Midtrans dan proses pembayaran
         \Midtrans\Config::$serverKey = config('midtrans.server_key');
         \Midtrans\Config::$isProduction = false;
         \Midtrans\Config::$isSanitized = true;
         \Midtrans\Config::$is3ds = true;
-
+    
         // Parameter untuk Snap Token
         $params = [
             'transaction_details' => [
@@ -74,12 +113,28 @@ class PesanController extends Controller
                 'email' => $validatedData['email'],
             ],
         ];
-
+    
         // Dapatkan Snap Token dari Midtrans
         $snapToken = \Midtrans\Snap::getSnapToken($params);
-
+    
         return response()->json(['snapToken' => $snapToken]);
     }
+    
+
+    
+    public function showFormPemesanan($id, $type)
+{
+    if ($type === 'post') {
+        $data = Post::findOrFail($id);
+    } elseif ($type === 'trip') {
+        $data = Trip::findOrFail($id);
+    } else {
+        abort(404, 'Type tidak valid');
+    }
+
+    return view('form_pemesanan', compact('data', 'type'));
+}
+
 
     /**
      * Callback dari Midtrans untuk memperbarui status pembayaran

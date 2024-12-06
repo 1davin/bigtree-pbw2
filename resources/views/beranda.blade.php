@@ -32,7 +32,7 @@
                         
                         <input 
                         type="search" 
-                        class="form-control form-control-lg rounded-pill" 
+                        class="form-control form-control-lg rounded-pill shadow-sm" 
                         placeholder="Cari Destinasi Wisata..." 
                         aria-label="Search" 
                         aria-describedby="search-addon"  
@@ -47,15 +47,16 @@
             </div>
 
            
-            <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 mt-5">
+            <div class="grid gap-5  mt-5">
                 @if($beranda->isEmpty())
                     <div class="col-12 text-center text-muted">
                         <p>Wisata yang Anda cari tidak dapat ditemukan.</p>
                         <a href="/beranda" class="text-primary font-weight-bold">Kembali</a>
-                    </div>
+                    </div> </div>
                 @else
                
 
+                <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 mt-5">
                         @foreach ($beranda as $post) 
                         <main class="d-flex justify-content-evenly">
                             <div class="card mb-3 shadow-lg" style="width: 18rem; height: 20rem; border-radius: 0;">

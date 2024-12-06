@@ -2,11 +2,11 @@
 
 
 body {
-    font-family: 'Poppins';
     background-color: #f8f9fa;
     display: flex;
     justify-content: center;
     padding: 20px;
+    font-family: 'Poppins';
 }
 
 .container {
@@ -19,12 +19,15 @@ body {
 
 .image-gallery img {
     width: 100%;
-    border-radius: 8px;
+max-height: 400px;
+object-fit: cover;
+position: relative;
+z-index: 1;
 }
 
 .thumbnail-row img {
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .details h1 {
@@ -72,7 +75,7 @@ body {
     position: absolute;
     bottom: 20px;
     right: 20px;
-}
+} 
 
 .price {
     font-size: 18px;
