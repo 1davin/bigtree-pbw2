@@ -147,7 +147,7 @@
 
     </section><!-- /About Section -->
 
-     <x-team /> --
+     <!-- <x-team />  -->
      <div id="team">
        <x-about />
 

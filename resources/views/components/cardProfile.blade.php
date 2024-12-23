@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-center mt-5 mb-5">
   <div class="card border border-0 mt-5 mx-5" style="width: 18rem;">
     <img  data-aos="fade-up"data-aos-duration="3000" src="/img/foto_almet.jpg" class="rounded-circle mx-auto d-block" style="width: 170px; height: 170px;" alt="">
-    <div   data-aos="zoom-in" data-aos-duration="3500" class="card-body text-center">
+    <div   data-aos="fade-up" data-aos-duration="3000" class="card-body text-center">
       <h6 class="card-title">M Ramadhan Fathoni</h6>
       <p class="card-text">Hiduplah bahagia walau tanpa sosok dia.</p>
       <div class="d-inline me-3"><a href="https://www.instagram.com/mrfthonyy_/">Instagram</a></div>
@@ -15,7 +15,7 @@
 
   <div class="card border border-0 mt-5 mx-5" style="width: 18rem;">
     <img  data-aos="fade-up" data-aos-duration="3000" src="/img/foto_davin.jpg" class="rounded-circle mx-auto d-block" style="width: 170px; height: 170px;" alt="">
-    <div  data-aos="zoom-in" data-aos-duration="3500" class="card-body text-center">
+    <div  data-aos="fade-up" data-aos-duration="3000" class="card-body text-center">
       <h6 class="card-title">Davin Ahmad Alaudin</h6>
       <p class="card-text">Jangan pernah putus asa, liburan di Liburin aja.</p>
       <div class="d-inline me-3"><a href="https://www.instagram.com/1paranoiaa/">Instagram</a></div>
@@ -25,7 +25,7 @@
 
   <div class="card border border-0 mt-5 mx-5" style="width: 18rem;">
     <img  data-aos="fade-up" data-aos-duration="3000" src="/img/foto_cevin.jpg" class="rounded-circle mx-auto d-block" style="width:170px; height:170px;" alt="">
-    <div  data-aos="zoom-in" data-aos-duration="3500" class="card-body text-center">
+    <div  data-aos="fade-up" data-aos-duration="3000" class="card-body text-center">
       <h6 class="card-title">Cevin Pratama Sundora</h6>
       <p class="card-text">Pantang mundur, hancurkan semua rintangan.</p>
       <div class="d-inline me-3"><a href="https://www.instagram.com/cvinn._/">Instagram</a></div>
