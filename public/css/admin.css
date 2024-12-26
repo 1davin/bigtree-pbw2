@@ -1,0 +1,12 @@
+.bg-primary {
+    background-image: linear-gradient(180deg,#0355ff, #0399ff);
+  }
+
+  .white {
+    color:white;
+  }
+
+  .custom-rounded-top-right {
+    border-top-right-radius: 5rem; /* Anda bisa mengubah 1rem sesuai kebutuhan */
+    border-top-left-radius: 0; /* Pastikan sisi kiri tidak ikut membulat */
+}

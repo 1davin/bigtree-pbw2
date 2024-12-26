@@ -122,7 +122,7 @@ class PostController extends Controller
         $post->author = $validatedData['author'];
         $post->linkPayment = $validatedData['linkPayment'];
         $post->harga = $validatedData['harga'];
-        $post->body = $validatedData['body'];
+        $post->body = $validatedData['body']; 
 
         if ($request->hasFile('image')) {
             $post->image = file_get_contents($request->file('image')->getRealPath());

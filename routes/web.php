@@ -12,10 +12,22 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 // Rute untuk Trip
+Route::resource('trips', TripController::class); 
 Route::get('/trip', [TripController::class, 'index'])->name('trip.index');
 Route::get('/trip/create', [TripController::class, 'create'])->name('trip.create');
 Route::post('/trip', [TripController::class, 'store'])->name('trip.store');
 Route::get('/trip/{id}', [TripController::class, 'show'])->name('trip.show');
+
+Route::get('/editTrip', [TripController::class, 'editTrip'])->name('editTrip');
+Route::get('/trips/{id}/edit', [TripController::class, 'edit'])->name('trips.edit');
+Route::put('/trips/{id}', [TripController::class, 'update'])->name('trips.update');
+Route::delete('/trips/{id}', [TripController::class, 'destroy'])->name('trips.destroy');
+
+Route::get('/editPost', [PostController::class, 'editPost'])->name('editPost');
+Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
+Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+
 
 // Rute untuk Post (Beranda)
 Route::get('/beranda', [PostController::class, 'index'])->name('beranda.index');
@@ -37,14 +49,9 @@ Route::get('/beranda/{post}', function (Post $post) {
         $post->image3 = 'data:image/jpeg;base64,' . base64_encode($post->image3);
     }
     return view('isi', ['title' => 'Single post', 'post' => $post]);
-})->name('beranda.show');
+})->name('beranda.show'); 
 
 // Rute untuk halaman admin yang menampilkan daftar wisata dengan fitur edit dan delete
-Route::get('/editPost', [PostController::class, 'editPost'])->name('editPost');
-Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
-Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
-Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
-
 // Rute statis untuk halaman About
 Route::get('/about', function () {
     return view('about', ['title' => 'About']);

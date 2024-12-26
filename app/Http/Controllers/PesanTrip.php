@@ -28,7 +28,7 @@ class TripController extends Controller
             'email' => 'required|email|max:255',
             'jumlah_tiket' => 'required|integer|min:1',
         ]);
-
+ 
         // Ambil data trip untuk mendapatkan detail wisata
         $trip = Trip::findOrFail($validatedData['trip_id']);
 

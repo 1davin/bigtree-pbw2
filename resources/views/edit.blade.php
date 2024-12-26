@@ -22,10 +22,6 @@
         <input type="text" name="author" value="{{ $post->author }}" class="form-control" required>
     </div>
 
-    <div class="mb-3">
-        <label for="linkPayment" class="form-label">Link Payment:</label>
-        <input type="text" name="linkPayment" value="{{ $post->linkPayment }}" class="form-control" required>
-    </div>
 
     <div class="mb-3">
         <label for="harga" class="form-label">Harga:</label>
